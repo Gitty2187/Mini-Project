@@ -28,6 +28,12 @@ const AddUser = (props) => {
     // const [conti,setConti]=useState(false)
 
     const save = async (name, userName, phone, email, adress) => {
+        if(!name)
+            return alert("must insert name")
+        if(!userName)
+            return alert("must insert user name")
+        if(phone && (phone.length< 9 || phone.length > 10))
+            return alert("phone not correct")
     // {!name ? <><Alert variant="outlined" severity="error">
     //     This is an outlined error Alert.
     // </Alert></> : setConti(true)} 

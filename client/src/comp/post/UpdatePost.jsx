@@ -18,6 +18,8 @@ const UpdatePost = (props) => {
     const [body, setBody] = useState(null)
 
     const update = async (title, body) => {
+        if(!title)
+            return alert("must insert title")
         const newPost = {
             _id: props.post._id,
             title: title,

@@ -18,6 +18,8 @@ const UpdateTask = (props) => {
     const [tags, setTags] = useState([])
     
     const update = async (title, tags) => {
+        if(!title)
+            return alert("must insert title")
         // setTags(tags+" ")
         // setTags(tags.split(" "));
         const newTask = {

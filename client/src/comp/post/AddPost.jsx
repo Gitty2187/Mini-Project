@@ -18,6 +18,8 @@ const AddPost = (props) => {
     const [body, setBody] = useState([])
 
     const save = async (title, body) => {
+        if(!title)
+            return alert("must insert title")
         const newPost = {
             title: title,
             body: body,

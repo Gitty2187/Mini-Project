@@ -11,17 +11,19 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 const Users = () => {
     const [usersData, setUsersData] = useState([])
     const [open, setOpen] = useState(false);
-    const [search,setSearch]=useState(false)
+    const [isFilter, setIsFilter] = useState(false)
   
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    
+    const search = (user) => {
+     //   return !isFilter || !user.name. ? true : false
+    }
 
     const getUsers = async () => {
-        setSearch(false)
+        setIsFilter(false)
         try {
             const res = await axios.get('http://localhost:8000/user')
             if (res.status === 200) {
@@ -58,10 +60,10 @@ const Users = () => {
                 ariaLabel="SpeedDial basic example"
                 sx={{ position: 'fixed', bottom: 16, right: 145 }}
                 icon={<SearchIcon />}
-                onClick={() => { setSearch(true) }}
+                onClick={() => { setIsFilter(true) }}
             >
             </SpeedDial>
-            {search && <SearchUser/>}
+            {isFilter && <SearchUser/>}
             <AddUser open={open} setOpen={setOpen} setUsersData={setUsersData}/>
            
         </Fragment>

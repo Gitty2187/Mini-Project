@@ -10,17 +10,21 @@ import Button from '@mui/material/Button';
 
 const Tasks = () => {
     const [tasksData, setTasksData] = useState([])
+    const [isFilter, setIsFilter] = useState(false)
     const [open, setOpen] = useState(false);
+    // const [ifSearch,setSearch] = useState(false)
 
-    const search = () => {
-        setTasksData(tasksData.filter(t=>t.completed === false))
-    };
+    const search = (task) => {
+        return !isFilter || !task.completed ? true : false
+    }
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+
     const getTasks = async () => {
+        setIsFilter(false)
         try {
             const res = await axios.get('http://localhost:8000/todo')
             if (res.status === 200) {
@@ -32,12 +36,12 @@ const Tasks = () => {
     }
 
     useEffect(() => {
-        getTasks();
+        getTasks()
     }, [])
 
 
     return (<>
-        {tasksData.map(task => <ShowTask task={task} setTasksData={setTasksData} />)}
+    {tasksData.filter((task) => search(task)).map(task => <ShowTask task={task} setTasksData={setTasksData} />)}
         <Fragment>
             <SpeedDial
                 ariaLabel="SpeedDial basic example"
@@ -54,7 +58,7 @@ const Tasks = () => {
             >
             </SpeedDial>
             <Button variant="outlined" color="error"
-            sx={{ position: 'fixed', bottom: 20, right: 148 ,height:"6%"}} onClick={() => { search() }}>
+            sx={{ position: 'fixed', bottom: 20, right: 148 ,height:"6%"}} onClick={() => { setIsFilter(true)}}>
                 Uncompleted tasks
             </Button >
 

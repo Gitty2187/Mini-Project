@@ -11,15 +11,14 @@ import SearchIcon from '@mui/icons-material/Search';
 const Posts = () => {
     const [postsData, setPostsData] = useState([])
     const [open, setOpen] = useState(false);
-    const [search,setSearch]=useState(false)
-   
+    const [isFilter, setIsFilter] = useState(false)
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const getPosts = async () => {
-        setSearch(false)
+        setIsFilter(false)
         try {
             const res = await axios.get('http://localhost:8000/post')
             if (res.status === 200) {
@@ -30,7 +29,9 @@ const Posts = () => {
         }
     }
 
-
+    const search = (post) => {
+    //    return !isFilter || !task.completed ? true : false
+    }
 
     useEffect(() => {
         getPosts()
@@ -57,12 +58,11 @@ const Posts = () => {
                 ariaLabel="SpeedDial basic example"
                 sx={{ position: 'fixed', bottom: 16, right: 145}}
                 icon={<SearchIcon />}
-                onClick={() => { setSearch(true) }}
+                onClick={() => { setIsFilter(true) }}
             >
             </SpeedDial>
             <AddPost open={open} setPostsData={setPostsData} setOpen={setOpen} />
-            {search && <SearchPost/>}
-            
+            {isFilter && <SearchPost/>}
         </Fragment>
     </>)
 }

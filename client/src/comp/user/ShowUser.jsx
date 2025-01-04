@@ -28,7 +28,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import Grid from '@mui/material/Grid';
 
 const ShowUser = (props) => {
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
   const [name, setName] = useState(null)
   const [adress, setAdress] = useState(null)
   const [phone, setPhone] = useState(null)
@@ -43,6 +43,13 @@ const ShowUser = (props) => {
     setOpen(false);
   };
   const update = async (name, userName, phone, email, adress) => {
+    console.log(name+" "+userName);
+    if (!name)
+      return alert("must insert name")
+    if (!userName)
+      return alert("must insert user name")
+    if(phone && (phone.length< 9 || phone.length > 10))
+      return alert("phone not correct")
     const newUser = {
       _id: props.user._id,
       email: email,
@@ -71,7 +78,7 @@ const ShowUser = (props) => {
       style={{ minHeight: '100vh' }}
     >
       <Grid item xs={8}> */}
-    <Card sx={{ maxWidth: '30%' , margin:'10px',marginLeft:'35%'}}  >
+    <Card sx={{ maxWidth: '30%', margin: '10px', marginLeft: '35%' }}  >
       <CardHeader style={{ textAlign: 'left' }}
         avatar={
           <Avatar sx={{ bgcolor: orange[700], size: 20 }} >
@@ -85,10 +92,10 @@ const ShowUser = (props) => {
         <Typography variant="body2" sx={{ color: 'text.secondary' }} style={{ textAlign: 'left' }}>
           {props.user.email && <>email: {props.user.email} {<br />}</>}
           {props.user.phone && <>phone: {props.user.phone} {<br />}</>}
-          {props.user.adress && <>adress: {props.user.adress} {<br />}</>}
+          {props.user.adress && <>address: {props.user.adress} {<br />}</>}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing sx={{marginLeft:'80%'}}>
+      <CardActions disableSpacing sx={{ marginLeft: '80%' }}>
         <IconButton aria-label="delete" onClick={deleteUser}>
           <DeleteIcon />
         </IconButton>

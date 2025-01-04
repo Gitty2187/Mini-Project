@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 
-const SearchUser = () => {
+const SearchPost = () => {
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -56,9 +56,10 @@ const Search = styled('div')(({ theme }) => ({
           <StyledInputBase
             placeholder="Search…"
             inputProps={{ 'aria-label': 'search' }}
+
           />
         </Search>
         </>)
 }
 
-        export default SearchUser
+        export default SearchPost

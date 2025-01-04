@@ -19,11 +19,13 @@ const AddTask = (props) => {
     // setTags(tags+" ")
     // setTags(tags.split(" "));
     const save = async (title, tags) => {
+        if(!title)
+            return alert("must insert title")
         // setTags(tags.split(" "))
         //debugger
         const newTask = {
             title: title,
-            tags: tags,
+            tags: tags ,
         }
         const res = await axios.post('http://localhost:8000/todo', newTask)
         props.setTasksData(res.data)
