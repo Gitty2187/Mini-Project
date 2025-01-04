@@ -5,7 +5,6 @@ const corsOptions = require("./config/corsOptions.js")
 const connectDB = require("./config/dbConn")
 const mongoose = require('mongoose')
 
-
 const PORT = process.env.PORT || 8000
 const app = express()
 connectDB()

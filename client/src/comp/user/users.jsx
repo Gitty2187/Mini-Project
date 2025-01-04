@@ -10,17 +10,23 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const Users = () => {
     const [usersData, setUsersData] = useState([])
+   const [searchValue, setSearchValue] = useState('');
     const [open, setOpen] = useState(false);
     const [isFilter, setIsFilter] = useState(false)
-  
+    //const[value,setValue]=useState("")
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const search = (user) => {
-     //   return !isFilter || !user.name. ? true : false
+        return !isFilter || user.name.includes(searchValue.toLowerCase()) ? true : false
     }
+
+    const handleSearchChange = (event) => {
+        
+        setSearchValue( event.target.value); 
+      };
 
     const getUsers = async () => {
         setIsFilter(false)
@@ -33,14 +39,14 @@ const Users = () => {
             console.error(e)
         }
     }
-        
+
     useEffect(() => {
         getUsers()
     }, [])
 
     return (<>
-    
-        {usersData.map(user => <ShowUser user={user} setUsersData={setUsersData} />)}
+
+        {usersData.filter(user => search(user)).map(user => <ShowUser user={user} setUsersData={setUsersData} />)}
         <Fragment>
             <SpeedDial
                 ariaLabel="SpeedDial basic example"
@@ -63,9 +69,9 @@ const Users = () => {
                 onClick={() => { setIsFilter(true) }}
             >
             </SpeedDial>
-            {isFilter && <SearchUser/>}
-            <AddUser open={open} setOpen={setOpen} setUsersData={setUsersData}/>
-           
+            {isFilter && <SearchUser handleSearchChange={handleSearchChange} searchValue={searchValue}/>}
+            <AddUser open={open} setOpen={setOpen} setUsersData={setUsersData} />
+
         </Fragment>
     </>)
 }
