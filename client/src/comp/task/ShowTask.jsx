@@ -13,14 +13,15 @@ import UpdateTask from './UpdateTask';
 
 const ShowTask = (props) => {
   const [open, setOpen] = useState(false);
+  debugger
   const [color, setColor] = useState(
     props.task.completed ? 'success' : 'error'
   )
 
   const handleClickOpen = () => {
     setOpen(true);
-};
-   
+  };
+
 
   const deleteTask = async () => {
     const res = await axios.delete(`http://localhost:8000/todo/${props.task._id}`)
@@ -28,15 +29,15 @@ const ShowTask = (props) => {
   }
 
   const isComp = async () => {
-    props.task.completed ? setColor('error') : setColor('success')
     const res = await axios.put(`http://localhost:8000/todo/${props.task._id}`)
+    props.task.completed ? setColor('success') : setColor('error')
     props.setTasksData(res.data)
   }
 
- 
+
 
   return (
-    <Card sx={{ maxWidth: '30%' , margin:'10px',marginLeft:'35%'}}  >
+    <Card sx={{ maxWidth: '30%', margin: '10px', marginLeft: '35%' }}  >
       <CardHeader style={{ textAlign: 'left' }}
         avatar={
           <Avatar sx={{ bgcolor: deepPurple[400], size: 20 }} >
@@ -48,7 +49,7 @@ const ShowTask = (props) => {
       />
       {/* <CardContent>
       </CardContent> */}
-      <CardActions disableSpacing sx={{marginLeft:'70%'}}>
+      <CardActions disableSpacing sx={{ marginLeft: '70%' }}>
         <IconButton aria-label="delete" onClick={deleteTask} >
           <DeleteIcon />
         </IconButton>
@@ -59,7 +60,7 @@ const ShowTask = (props) => {
           <AddTaskIcon onClick={() => { isComp() }} />
         </IconButton>
       </CardActions>
-      <UpdateTask  open={open}  setOpen={setOpen} task={props.task} setTasksData={props.setTasksData} /> 
+      <UpdateTask open={open} setOpen={setOpen} task={props.task} setTasksData={props.setTasksData} />
     </Card>
 
   );

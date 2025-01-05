@@ -16,13 +16,11 @@ import TaskIcon from '@mui/icons-material/Task';
 const AddTask = (props) => {
     const [title, setTitle] = useState(null)
     const [tags, setTags] = useState()
-    // setTags(tags+" ")
-    // setTags(tags.split(" "));
     const save = async (title, tags) => {
         if(!title)
             return alert("must insert title")
-        // setTags(tags.split(" "))
-        //debugger
+        if(tags)
+            setTags(tags.split(","))
         const newTask = {
             title: title,
             tags: tags ,

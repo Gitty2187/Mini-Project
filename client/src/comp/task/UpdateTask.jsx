@@ -16,12 +16,12 @@ import { useState } from "react"
 const UpdateTask = (props) => {
     const [title, setTitle] = useState(null)
     const [tags, setTags] = useState([])
-    
+
     const update = async (title, tags) => {
-        if(!title)
+        if (!title)
             return alert("must insert title")
-        // setTags(tags+" ")
-        // setTags(tags.split(" "));
+        if (tags)
+            setTags(tags.split(","))
         const newTask = {
             _id: props.task._id,
             title: title,
@@ -72,7 +72,7 @@ const UpdateTask = (props) => {
                 <Button size="small" onClick={handleClose}>
                     Cancel
                 </Button>
-                <Button size="small" onClick={() => { update(title,tags) }} variant="contained">
+                <Button size="small" onClick={() => { update(title, tags) }} variant="contained">
                     update
                 </Button>
             </DialogActions>

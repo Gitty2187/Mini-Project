@@ -12,10 +12,22 @@ const Posts = () => {
     const [postsData, setPostsData] = useState([])
     const [open, setOpen] = useState(false);
     const [isFilter, setIsFilter] = useState(false)
+    const [searchValue, setSearchValue] = useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+
+    const search = (post) => {
+        return !isFilter || post.title.includes(searchValue.toLowerCase()) ? true : false
+    }
+
+    const handleSearchChange = (event) => {
+        
+        setSearchValue( event.target.value); 
+      };
+
+
 
     const getPosts = async () => {
         setIsFilter(false)
@@ -29,16 +41,13 @@ const Posts = () => {
         }
     }
 
-    const search = (post) => {
-    //    return !isFilter || !task.completed ? true : false
-    }
 
     useEffect(() => {
         getPosts()
     }, [])
 
     return (<>
-        {postsData.map(post => <ShowPost post={post} setPostsData={setPostsData} />)}
+        {postsData.filter(post => search(post)).map(post => <ShowPost post={post} setPostsData={setPostsData} />)}
         <Fragment>
             <SpeedDial
                 ariaLabel="SpeedDial basic example"
@@ -62,7 +71,7 @@ const Posts = () => {
             >
             </SpeedDial>
             <AddPost open={open} setPostsData={setPostsData} setOpen={setOpen} />
-            {isFilter && <SearchPost/>}
+            {isFilter && <SearchPost handleSearchChange={handleSearchChange} searchValue={searchValue}/>}
         </Fragment>
     </>)
 }

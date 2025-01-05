@@ -5,7 +5,6 @@ import SearchIcon from '@mui/icons-material/Search';
 //import { useRef,useEffect } from 'react';
 
 
-
 const SearchUser = (props) => {
   //const inputRef = useRef(null);
   const Search = styled('div')(({ theme }) => ({
@@ -33,13 +32,6 @@ const SearchUser = (props) => {
     justifyContent: 'center',
   }));
 
- 
-
-  // useEffect(() => {
-  //     if (inputRef.current) {
-  //         inputRef.current.focus(); // החזרת הפוקוס לשדה החיפוש
-  //     }
-  // }, []);
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
@@ -69,7 +61,7 @@ const SearchUser = (props) => {
       </SearchIconWrapper>
       <StyledInputBase
       //inputRef={inputRef}
-        placeholder="Search…"
+        placeholder="Search by name…"
         inputProps={{ 'aria-label': 'search' }}
         value={props.searchValue}
         onChange={props.handleSearchChange}

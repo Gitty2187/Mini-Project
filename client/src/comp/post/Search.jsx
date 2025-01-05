@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 
-const SearchPost = () => {
+const SearchPost = (props) => {
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -54,8 +54,10 @@ const Search = styled('div')(({ theme }) => ({
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
-            placeholder="Search…"
+            placeholder="Search by title…"
             inputProps={{ 'aria-label': 'search' }}
+            value={props.searchValue}
+        onChange={props.handleSearchChange}
 
           />
         </Search>
